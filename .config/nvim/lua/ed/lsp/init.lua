@@ -30,7 +30,7 @@ return {
         "lua_ls",
         "rust_analyzer",
         "gopls",
-        "ts_ls",
+        "tsserver",
         "zls",
       },
       handlers = {
