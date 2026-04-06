@@ -14,6 +14,7 @@ return {
         css = { "prettier" },
         lua = { "stylua" },
         rust = { "rustfmt" },
+        sql = { "sqlfluff" },
       },
       format_on_save = {
         timeout_ms = 500,

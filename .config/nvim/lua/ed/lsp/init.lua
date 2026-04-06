@@ -18,7 +18,7 @@ return {
     require("fidget").setup({})
     require("mason").setup()
     local mason_registry = require("mason-registry")
-    local ensure_installed = { "prettier", "gofumpt", "goimports", "stylua" }
+    local ensure_installed = { "prettier", "gofumpt", "goimports", "stylua", "sqlfluff" }
     for _, tool in ipairs(ensure_installed) do
       local pkg = mason_registry.get_package(tool)
       if not pkg:is_installed() then
