@@ -48,6 +48,10 @@ install_goenv() {
 install_go() {
     export GOENV_ROOT="$HOME/.goenv"
     export PATH="$GOENV_ROOT/bin:$PATH"
+    if ! command -v goenv &>/dev/null; then
+        log "go: goenv not available, skipping"
+        return
+    fi
     eval "$(goenv init -)"
 
     latest=$(goenv install --list | grep -E '^\s+[0-9]+\.[0-9]+\.[0-9]+$' | tail -1 | tr -d ' ')
