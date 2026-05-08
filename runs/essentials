@@ -24,6 +24,10 @@ install_nvm() {
 install_node() {
     export NVM_DIR="$HOME/.nvm"
     [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+    if ! command -v nvm &>/dev/null; then
+        log "node: nvm not available, skipping"
+        return
+    fi
     if nvm ls --no-colors 2>/dev/null | grep -q "lts/"; then
         log "node: LTS already installed, skipping"
         return
