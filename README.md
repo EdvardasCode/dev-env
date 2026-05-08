@@ -3,6 +3,9 @@
 ## Setup
 
 ```bash
+# Install essentials (brew, nvm, node, goenv, go)
+./runs/essentials
+
 # Install tools (fzf, deno, neovim, tmux)
 ./run
 
@@ -14,6 +17,7 @@ Open neovim, Mason auto-installs LSP servers and formatters on first launch.
 
 ## What's in here
 
+- **Essentials** — brew, nvm + Node.js LTS, goenv + Go (latest stable)
 - **Neovim** — LSP (Go, TypeScript, Rust, Zig, Lua), format-on-save, telescope, harpoon, treesitter, gruvbox
 - **Tmux** — C-a prefix, vi copy mode, project sessionizer via C-f
 - **Shell** — aliases and zsh profile
