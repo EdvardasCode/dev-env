@@ -64,6 +64,24 @@ install_go() {
     goenv global "$latest"
 }
 
+install_git() {
+    if brew list git &>/dev/null; then
+        log "git: already installed, skipping"
+        return
+    fi
+    log "git: installing..."
+    brew install git
+}
+
+install_gh() {
+    if command -v gh &>/dev/null; then
+        log "gh: already installed, skipping"
+        return
+    fi
+    log "gh: installing..."
+    brew install gh
+}
+
 install_ghostty() {
     if [ -d "/Applications/Ghostty.app" ]; then
         log "ghostty: already installed, skipping"
@@ -83,6 +101,8 @@ install_arc() {
 }
 
 install_brew
+install_git
+install_gh
 install_nvm
 install_node
 install_goenv
