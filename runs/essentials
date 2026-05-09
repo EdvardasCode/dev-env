@@ -64,8 +64,28 @@ install_go() {
     goenv global "$latest"
 }
 
+install_ghostty() {
+    if [ -d "/Applications/Ghostty.app" ]; then
+        log "ghostty: already installed, skipping"
+        return
+    fi
+    log "ghostty: installing..."
+    brew install --cask ghostty
+}
+
+install_arc() {
+    if [ -d "/Applications/Arc.app" ]; then
+        log "arc: already installed, skipping"
+        return
+    fi
+    log "arc: installing..."
+    brew install --cask arc
+}
+
 install_brew
 install_nvm
 install_node
 install_goenv
 install_go
+install_ghostty
+install_arc
