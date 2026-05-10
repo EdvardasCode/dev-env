@@ -100,6 +100,24 @@ install_docker_compose() {
     brew install docker-compose
 }
 
+install_pnpm() {
+    if command -v pnpm &>/dev/null; then
+        log "pnpm: already installed, skipping"
+        return
+    fi
+    log "pnpm: installing..."
+    brew install pnpm
+}
+
+install_postgresql() {
+    if brew list postgresql@17 &>/dev/null; then
+        log "postgresql@17: already installed, skipping"
+        return
+    fi
+    log "postgresql@17: installing..."
+    brew install postgresql@17
+}
+
 install_ghostty() {
     if [ -d "/Applications/Ghostty.app" ]; then
         log "ghostty: already installed, skipping"
@@ -127,5 +145,7 @@ install_goenv
 install_go
 install_docker
 install_docker_compose
+install_pnpm
+install_postgresql
 install_ghostty
 install_arc
