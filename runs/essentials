@@ -82,6 +82,24 @@ install_gh() {
     brew install gh
 }
 
+install_docker() {
+    if command -v docker &>/dev/null; then
+        log "docker: already installed, skipping"
+        return
+    fi
+    log "docker: installing..."
+    brew install docker
+}
+
+install_docker_compose() {
+    if command -v docker-compose &>/dev/null; then
+        log "docker-compose: already installed, skipping"
+        return
+    fi
+    log "docker-compose: installing..."
+    brew install docker-compose
+}
+
 install_ghostty() {
     if [ -d "/Applications/Ghostty.app" ]; then
         log "ghostty: already installed, skipping"
@@ -107,5 +125,7 @@ install_nvm
 install_node
 install_goenv
 install_go
+install_docker
+install_docker_compose
 install_ghostty
 install_arc
