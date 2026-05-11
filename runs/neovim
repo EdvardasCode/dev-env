@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-git clone -b v0.10.1 https://github.com/neovim/neovim.git $HOME/personal/neovim
+git clone -b v0.12.2 https://github.com/neovim/neovim.git $HOME/personal/neovim
 brew install cmake gettext luajit
 
 cd $HOME/personal/neovim
