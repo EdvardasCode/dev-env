@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 git clone -b v0.10.1 https://github.com/neovim/neovim.git $HOME/personal/neovim
-brew install cmake gettext lua5.1 luajit
+brew install cmake gettext luajit
 
 cd $HOME/personal/neovim
 make CMAKE_BUILD_TYPE=RelWithDebInfo

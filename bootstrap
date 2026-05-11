@@ -49,7 +49,7 @@ copy_file() {
 }
 
 copy_file shell/.specialrc ~/
-copy_file shell/.zsh_profile ~/
+copy_file shell/.zprofile ~/
 copy_file .ready-tmux ~/
 copy_dir .config ${XDG_CONFIG_HOME:-$HOME/.config}
 copy_dir .local $HOME/.local
