@@ -27,26 +27,10 @@ return {
       end
     end
 
-    require("mason-lspconfig").setup({
-      ensure_installed = {
-        "lua_ls",
-        "rust_analyzer",
-        "gopls",
-        "ts_ls",
-        "zls",
-      },
-      automatic_enable = false,
-    })
+    vim.lsp.config("*", { capabilities = capabilities })
 
-    local lspconfig = require("lspconfig")
-
-    for _, server in ipairs({ "rust_analyzer", "gopls", "ts_ls" }) do
-      lspconfig[server].setup({ capabilities = capabilities })
-    end
-
-    lspconfig.zls.setup({
-      capabilities = capabilities,
-      root_dir = lspconfig.util.root_pattern(".git", "build.zig", "zls.json"),
+    vim.lsp.config("zls", {
+      root_markers = { ".git", "build.zig", "zls.json" },
       settings = {
         zls = {
           enable_inlay_hints = true,
@@ -58,8 +42,7 @@ return {
     vim.g.zig_fmt_parse_errors = 0
     vim.g.zig_fmt_autosave = 0
 
-    lspconfig.lua_ls.setup({
-      capabilities = capabilities,
+    vim.lsp.config("lua_ls", {
       settings = {
         Lua = {
           runtime = { version = "Lua 5.1" },
@@ -68,6 +51,17 @@ return {
           },
         },
       },
+    })
+
+    require("mason-lspconfig").setup({
+      ensure_installed = {
+        "lua_ls",
+        "rust_analyzer",
+        "gopls",
+        "ts_ls",
+        "zls",
+      },
+      automatic_enable = true,
     })
 
     vim.diagnostic.config({
