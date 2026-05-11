@@ -17,6 +17,7 @@ return {
 
     require("fidget").setup({})
     require("mason").setup()
+
     local mason_registry = require("mason-registry")
     local ensure_installed = { "prettier", "gofumpt", "goimports", "stylua", "sqlfluff" }
     for _, tool in ipairs(ensure_installed) do
@@ -25,6 +26,7 @@ return {
         pkg:install()
       end
     end
+
     require("mason-lspconfig").setup({
       ensure_installed = {
         "lua_ls",
@@ -33,44 +35,38 @@ return {
         "ts_ls",
         "zls",
       },
-      handlers = {
-        function(server_name)
-          require("lspconfig")[server_name].setup({
-            capabilities = capabilities,
-          })
-        end,
+      automatic_enable = false,
+    })
 
-        zls = function()
-          local lspconfig = require("lspconfig")
-          lspconfig.zls.setup({
-            capabilities = capabilities,
-            root_dir = lspconfig.util.root_pattern(".git", "build.zig", "zls.json"),
-            settings = {
-              zls = {
-                enable_inlay_hints = true,
-                enable_snippets = true,
-                warn_style = true,
-              },
-            },
-          })
-          vim.g.zig_fmt_parse_errors = 0
-          vim.g.zig_fmt_autosave = 0
-        end,
+    local lspconfig = require("lspconfig")
 
-        ["lua_ls"] = function()
-          local lspconfig = require("lspconfig")
-          lspconfig.lua_ls.setup({
-            capabilities = capabilities,
-            settings = {
-              Lua = {
-                runtime = { version = "Lua 5.1" },
-                diagnostics = {
-                  globals = { "bit", "vim", "it", "describe", "before_each", "after_each" },
-                },
-              },
-            },
-          })
-        end,
+    for _, server in ipairs({ "rust_analyzer", "gopls", "ts_ls" }) do
+      lspconfig[server].setup({ capabilities = capabilities })
+    end
+
+    lspconfig.zls.setup({
+      capabilities = capabilities,
+      root_dir = lspconfig.util.root_pattern(".git", "build.zig", "zls.json"),
+      settings = {
+        zls = {
+          enable_inlay_hints = true,
+          enable_snippets = true,
+          warn_style = true,
+        },
+      },
+    })
+    vim.g.zig_fmt_parse_errors = 0
+    vim.g.zig_fmt_autosave = 0
+
+    lspconfig.lua_ls.setup({
+      capabilities = capabilities,
+      settings = {
+        Lua = {
+          runtime = { version = "Lua 5.1" },
+          diagnostics = {
+            globals = { "bit", "vim", "it", "describe", "before_each", "after_each" },
+          },
+        },
       },
     })
 
